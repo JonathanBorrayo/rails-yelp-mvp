@@ -1,19 +1,29 @@
-<h2 class="mb-3">Reviews</h2>
+<div class="container my-4">
+  <h1><%= @restaurant.name %></h1>
+  <p class="text-muted"><%= @restaurant.category.capitalize %></p>
+  <p><%= @restaurant.address %></p>
+  <p><%= @restaurant.phone_number %></p>
 
-<%= simple_form_for [@restaurant, @review] do |f| %>
-  <%= f.input :rating, collection: 0..5, include_blank: false %>
-  <%= f.input :content %>
-  <%= f.button :submit, class: "btn btn-primary",
-        data: { turbo_submits_with: "Saving..." } %>
-<% end %>
+  <hr>
 
-<hr>
+  <h2 class="mb-3">Reviews</h2>
 
-<% @restaurant.reviews.each do |review| %>
-  <div class="card mb-2">
-    <div class="card-body">
-      <h6 class="card-subtitle mb-2 text-muted">Rating: <%= review.rating %>/5</h6>
-      <p class="card-text"><%= review.content %></p>
+  <%= simple_form_for [@restaurant, @review] do |f| %>
+    <%= f.input :rating, collection: 0..5, include_blank: false %>
+    <%= f.input :content %>
+    <%= f.button :submit, class: "btn btn-primary" %>
+  <% end %>
+
+  <hr>
+
+  <% @restaurant.reviews.each do |review| %>
+    <div class="card mb-2">
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2 text-muted">Rating: <%= review.rating %>/5</h6>
+        <p class="card-text"><%= review.content %></p>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+
+  <%= link_to "← Back to restaurants", restaurants_path, class: "btn btn-outline-secondary mt-3" %>
+</div>
